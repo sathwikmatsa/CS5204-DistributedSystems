@@ -72,15 +72,11 @@ vector<vector<int>> matrix_multiply_parallel(vector<vector<int>> A, vector<vecto
     assert((n_cols_a == n_rows_b) && "input matrices can't be multiplied!");
 
     vector<vector<int>> C = create_zero_matrix(n_rows_a, n_cols_b);
-    #pragma omp parallel
-    {
-        omp_set_num_threads(4);
-        #pragma omp for
-        for(int i = 0; i < n_rows_a; i++) {
-            for(int j = 0; j < n_cols_b; j++) {
-                for(int k = 0; k < n_cols_a; k++) {
-                    C[i][j] += A[i][k] * B[k][j];
-                }
+    #pragma omp parallel for collapse(2)
+    for(int i = 0; i < n_rows_a; i++) {
+        for(int j = 0; j < n_cols_b; j++) {
+            for(int k = 0; k < n_cols_a; k++) {
+                C[i][j] += A[i][k] * B[k][j];
             }
         }
     }
