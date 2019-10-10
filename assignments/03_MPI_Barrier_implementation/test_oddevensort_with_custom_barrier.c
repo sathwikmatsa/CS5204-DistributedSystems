@@ -151,7 +151,7 @@ int main(int argc, char* argv[]) {
     // testing
     //if(id == 0) unit_tests();
     //MPI_Barrier(MPI_COMM_WORLD);
-    mpi_iittp_barrier();
+    MPI_IITTP_BARRIER;
 
     // initialization
     srand(id+1);
@@ -174,11 +174,11 @@ int main(int argc, char* argv[]) {
         sort_phase(ODD, &p);
         //print_array(&p, "Array elements after odd phase:");
         //MPI_Barrier(MPI_COMM_WORLD);
-        mpi_iittp_barrier();
+        MPI_IITTP_BARRIER;
         sort_phase(EVEN, &p);
         //print_array(&p, "Array elements after even phase:");
         //MPI_Barrier(MPI_COMM_WORLD);
-        mpi_iittp_barrier();
+        MPI_IITTP_BARRIER;
     }
 
     print_array(&p, "Array elements after sorting:");
